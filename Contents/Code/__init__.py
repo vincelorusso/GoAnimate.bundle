@@ -31,6 +31,9 @@ def Start():
     HTTP.CacheTime = CACHE_1HOUR
 
 def VideoMainMenu():
+    # Reset to clear tracking url
+    Dict.Reset()
+    Dict['last_video_url'] = ''
 
     dir = MediaContainer(viewGroup="InfoList")
     
@@ -211,7 +214,18 @@ def FeedEntriesToListitems(pageTitle, feedEntries, isSearch):
     return dir
 
 def PlayVideo(sender, url):
-    fetcher = veedios.Fetcher()
-    fetcher.track(url)
+    # PlayVideo is called each time a video is played or fast forwarded.  We only care about new plays and this messes up tracking.
+    # Keep track of the latest play url and only track if it doesn't match
+    if 'last_video_url' in Dict:
+        if Dict['last_video_url'] != url:
+            fetcher = veedios.Fetcher()
+            fetcher.track(url)
+    else:
+        fetcher = veedios.Fetcher()
+        fetcher.track(url)
+    
+    # Keep track of the last url played for comparison
+    Dict['last_video_url'] = url
+    Dict.Save()
     
     return Redirect(url)

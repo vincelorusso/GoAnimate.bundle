@@ -11,7 +11,7 @@ from Classes import appconfig
 class Fetcher:
 
     def __init__(self):        
-        self.app_base_url = "http://apps.veedios.com/app/"
+        self.app_base_url = "http://1.veedios.appspot.com/app/"
         self.categories = self.fetch_categories()
         self.singleLevelDefaultCategoryTitle = "Videos"
         self.anonymous_identifier = self.get_anonymous_identifier()      
