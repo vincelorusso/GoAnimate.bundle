@@ -18,8 +18,6 @@
 	<string>hook</string>
 	<key>CFBundleVersion</key>
 	<string>1.1</string>
-	<key>PlexClientPlatforms</key>
-	<string>MacOSX,iOS,Android,LGTV</string>
 	<key>PlexPluginMode</key>
 	<string>AlwaysOn</string>
 </dict>
